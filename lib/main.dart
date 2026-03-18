@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'core/theme/app_theme.dart';
 import 'screens/role_selection_screen.dart';
 
 void main() {
-  // 1. Aquí llamamos a la aplicación principal, NO a la pantalla directamente
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+  ));
   runApp(const BarbeoApp());
 }
 
@@ -11,17 +18,10 @@ class BarbeoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 2. Aquí está el MaterialApp que Flutter te está pidiendo a gritos
     return MaterialApp(
       title: 'Barbeo',
-      debugShowCheckedModeBanner: false, 
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        primaryColor: Colors.black,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-      ),
-      // 3. Y aquí es donde le decimos qué pantalla cargar primero
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.theme,
       home: const RoleSelectionScreen(),
     );
   }
